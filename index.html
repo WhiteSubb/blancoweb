@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blanco's prod mission</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script>
+(function() {
+    function isBot() {
+        var w = window;
+        var n = navigator;
+        var ua = n.userAgent.toLowerCase();
+        if (n.webdriver === true) return true;
+        if (n.plugins && n.plugins.length === 0) return true;
+        if (n.languages && n.languages.length === 0) return true;
+        if (w.callPhantom || w._phantom) return true;
+        if (w.__webdriver_evaluate || w.__selenium_evaluate) return true;
+        if (w.document.documentElement.getAttribute('webdriver')) return true;
+        if (ua.includes('headless')) return true;
+        if (ua.includes('phantomjs')) return true;
+        if (ua.includes('puppeteer')) return true;
+        if (ua.includes('selenium')) return true;
+        if (!w.chrome && !w.opera) {
+            if (n.plugins.length === 0) return true;
+        }
+        return false;
+    }
+    if (isBot()) {
+        document.documentElement.innerHTML = '<h1 style="color:red;text-align:center;margin-top:20%;">🚫 Accès refusé</h1>';
+        setInterval(function() { debugger; }, 50);
+        setTimeout(function() { window.location.href = 'about:blank'; }, 200);
+        throw new Error('Bot blocked');
+    }
+    var humanInteracted = false;
+    function markHuman() {
+        humanInteracted = true;
+        var overlay = document.getElementById('human-check-overlay');
+        if (overlay) overlay.classList.remove('visible');
+        var container = document.querySelector('.container');
+        if (container) container.classList.remove('bot-blocked');
+    }
+    document.addEventListener('mousemove', markHuman, { once: true });
+    document.addEventListener('touchstart', markHuman, { once: true });
+    document.addEventListener('click', markHuman, { once: true });
+    document.addEventListener('keydown', markHuman, { once: true });
+    setTimeout(function() {
+        if (!humanInteracted) {
+            var container = document.querySelector('.container');
+            if (container) container.classList.add('bot-blocked');
+            var overlay = document.createElement('div');
+            overlay.id = 'human-check-overlay';
+            overlay.className = 'visible';
+            overlay.innerHTML = `
+                        <div class="spinner-mini"></div>
+                        <h1>🧐 Vérification humaine</h1>
+                        <p>Pour continuer, interagissez avec la page :<br>
+                        <strong>cliquez</strong> n'importe où, ou <strong>bougez</strong> la souris.</p>
+                        <p style="font-size:0.8rem;color:#64748b;margin-top:1.5rem;">(Protection anti-bot)</p>
+                    `;
+            document.body.appendChild(overlay);
+            overlay.addEventListener('click', markHuman);
+            overlay.addEventListener('mousemove', markHuman);
+            overlay.addEventListener('touchstart', markHuman);
+        }
+    }, 4000);
+    document.addEventListener('DOMContentLoaded', function() {
+        var sendBtn = document.getElementById('send');
+        var verifyBtn = document.getElementById('verify');
+        function wrapButton(btn) {
+            if (!btn) return;
+            var originalClick = btn.onclick;
+            btn.onclick = function(e) {
+                if (!humanInteracted) {
+                    alert('⚠️ Veuillez d\'abord interagir avec la page (cliquez ou bougez la souris).');
+                    return;
+                }
+                if (originalClick) originalClick.call(this, e);
+            };
+        }
+        wrapButton(sendBtn);
+        wrapButton(verifyBtn);
+    });
+    setInterval(function() {
+        if (navigator.webdriver === true) {
+            document.body.innerHTML = '<h1>403</h1>';
+            while (true) { debugger; }
+        }
+    }, 2000);
+})();
+</script>
+
+    <h1>Blanco Production.</h1>
+    <h2>What is blanco prod ?</h2>
+    <h3>| blanco production, is a box managing writers such as whitedevv, any tools that the writer helps themselves will be credited 'blanco prod', as they have been made and put in place by the box, in order to provide assistance to the developer.</h3>
+    <h2>What utility ?</h2>
+    <h3>| blanco's production is a managing company, everything related to whitedevv.</h3>
+    <h2>See whitedevv work !</h2>
+    <a href="https://whitedevv.carrd.co/" target="_blank" rel="noopener noreferrer">→ click here</a>
+    <h2>Whitedevv domain :</h2>
+    <h3>| scripter that use ModuleScript and clean hierarchy (i think)</h3>
+    <h2>more details !</h2>
+    <h3>| payements method : only paypal or robux. (start on 1k robux)</h3>
+    <h3>| contact me on discord : (w42h)</h3>
+    <h2>more links :</h2>
+    <a href="https://www.roblox.com/users/1456898641/profile" target="_blank" rel="noopener noreferrer">→ whitedevv roblox</a>
+    <div>
+    <a href="https://www.roblox.com/communities/36028142/White-PRODUCTION" target="_blank" rel="noopener noreferrer">→ our roblox</a>
+    <div></div>
+    <a href="https://" target="_blank" rel="noopener noreferrer">→ whitedevv X (in creation)</a>
+    <div></div>
+    <a href="https://rodevs.com/portfolios/708270624224837644" target="_blank" rel="noopener noreferrer">→ whitedevv rodev portfolio</a>
+    <h2>Whitedevv face reveal</h2>
+    <img src="milky cat.jpg" alt="">
+    <!-- <h2>WE ARE BLANCO'S.</h2> -->
+    <h4>• you have reached the end... •</h4>
+    <h4>• Blanco's PROD COPYRIGHT 2026 •</h4>
+    <!-- <img src="milky cat.jpg" alt="" srcset="" class="img"> -->
+</body>
+</html>
